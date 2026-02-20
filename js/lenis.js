@@ -7,8 +7,3 @@ window.lenis = new Lenis({
     wheelMultiplier: 0.9,
     touchMultiplier: 1.5,
 });
-
-// Listen for the scroll event and log the event data
-window.lenis.on('scroll', (e) => {
-    console.log(e);
-});

@@ -25,6 +25,153 @@
             visibility: hidden !important;
         }
     </style>
+    <style>
+        /* File input styling */
+        #File {
+            cursor: pointer;
+            color: #a8a8a8;
+        }
+
+        #File::file-selector-button {
+            display: none;
+            color: #fff;
+        }
+
+        /* Firefox specific */
+        #File::-webkit-file-upload-button {
+            display: none;
+        }
+
+        /* Modal gallery styles */
+        .modal-gallery {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .2s ease, visibility .2s;
+        }
+
+        .modal-gallery.open {
+            visibility: visible;
+            opacity: 1
+        }
+
+        .modal-gallery .modal-content {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px
+        }
+
+
+        .modal-gallery img {
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, .6)
+        }
+
+        .modal-gallery .modal-close,
+        .modal-gallery .modal-prev,
+        .modal-gallery .modal-next {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 28px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .modal-gallery .modal-close {
+            right: 12px;
+            top: 12px;
+            padding: 12px;
+            font-size: 22px;
+            border-radius: 6px
+        }
+
+        .modal-gallery .modal-prev {
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal-gallery .modal-next {
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal-gallery .modal-main-img {
+            width: 70%;
+            height: auto;
+            max-height: 75vh;
+            object-fit: contain
+        }
+
+        .modal-gallery .modal-previews {
+            width: 90%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 8px 6px;
+            justify-content: center;
+        }
+
+        .modal-gallery .modal-previews img {
+            width: 84px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 4px;
+            opacity: 0.7;
+            cursor: pointer;
+            border: 2px solid transparent
+        }
+
+        .modal-gallery .modal-previews img.active {
+            opacity: 1;
+            border-color: #fff
+        }
+
+        .modal-gallery .modal-caption {
+            color: #fff;
+            text-align: center;
+            font-size: 14px
+        }
+
+        @media (max-width:700px) {
+            .modal-gallery .modal-main-img {
+                width: 92%
+            }
+
+            .modal-gallery .modal-previews img {
+                width: 64px;
+                height: 44px
+            }
+
+            .modal-gallery .modal-prev,
+            .modal-gallery .modal-next {
+                padding: 12px;
+                font-size: 20px
+            }
+        }
+    </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
@@ -85,7 +232,7 @@
                             class="nav-link text-light w-nav-link">Services</a><a href="#contact"
                             class="nav-link text-light w-nav-link">Contact</a>
                     </div>
-                </nav><a data-w-id="6853fd3b-c9bc-a9da-e100-4dcd2d9046ee" href="tel:+61733780281"
+                </nav><a data-w-id="6853fd3b-c9bc-a9da-e100-4dcd2d9046ee" href="tel:+61410526094"
                     class="button-cta button-nav w-button">Call Us</a>
                 <div data-w-id="6853fd3b-c9bc-a9da-e100-4dcd2d9046f0" class="menu-button w-nav-button">
                     <div class="hamburger-wrapper">
@@ -105,7 +252,7 @@
                 REALITY</h1>
             <div class="hero-button-wrapper"><a
                     data-wf-target="[[[&quot;69960453be2e0388c73de1fd&quot;,&quot;788c072d-4b2e-2894-7496-30ef289dd043&quot;],[]]]"
-                    data-w-id="788c072d-4b2e-2894-7496-30ef289dd043" href="tel:+61733780281"
+                    data-w-id="788c072d-4b2e-2894-7496-30ef289dd043" href="tel:+61410526094"
                     class="button-cta w-button">Call Us</a></div>
         </div>
         <div class="header-corasel-wrapper">
@@ -164,8 +311,7 @@
                         <p class="button-link">View Resume</p><img src="images/iconmonstr-file-34-201.svg"
                             loading="lazy" width="22" alt="" />
                     </a>
-                </div><img data-scroll-reveal src="images/itay-verchik-man-7956041_1280-20-1-.webp" loading="lazy"
-                    alt="" class="image-2" />
+                </div><img data-scroll-reveal src="images/sailesh_pp.webp" loading="lazy" alt="" class="image-2" />
             </div>
         </div>
     </section>
@@ -177,119 +323,23 @@
             <div class="projects-wrapper gap-40">
                 <div class="project-section-title" data-scroll-stagger>
                     <p class="text-desc text-neon text-center">Some of our recent work</p>
-                    <h2 class="text-subheading text-center" id="currentTitle">Commercial &amp; Industrial</h2>
-                </div>
-                <div data-scroll-stagger class="project_selector">
-                    <a href="#" class="project_selector-link active" data-target="#industrial">Commercial &amp;
-                        Industrial</a>
-                    <a href="#" class="project_selector-link" data-target="#residential">Residential</a>
-                    <a href="#" class="project_selector-link" data-target="#schools">Schools &amp; Learning centres</a>
+                    <h2 class="text-subheading text-center" id="currentTitle">Projects</h2>
                 </div>
             </div>
-            <div class="swiper mySwiper" id="industrial">
-                <div class="swiper-wrapper" data-scroll-reveal>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/NewAldiSupermarketOrmeau/ind2.webp"
-                            alt="New Aldi Supermarket, Ormeau" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/WaterfordPlazaUplift&amp;Restoration/ind7.webp"
-                            alt="Waterford Plaza — Uplift &amp; Restoration" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/PWRAdvancedCoolingTechnology,Stapylton-NewFactoryAlterations/ind3.webp"
-                            alt="PWR Advanced Cooling Technology, Stapylton" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/Beenleigh/ind1.webp"
-                            alt="Beenleigh — Industrial project" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/WaterfordPlazaUplift&amp;Restoration/ind4.webp"
-                            alt="Waterford Plaza — Uplift &amp; Restoration" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/WaterfordPlazaUplift&amp;Restoration/ind5.webp"
-                            alt="Waterford Plaza — Uplift &amp; Restoration" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Industrial&amp;Commercial/WaterfordPlazaUplift&amp;Restoration/ind6.webp"
-                            alt="Waterford Plaza — Uplift &amp; Restoration" loading="lazy" />
-                    </div>
-
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="swiper mySwiper" id="residential" style="display: none;">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/dkp_mer_baker20S.webp" alt="Baker Residence"
-                            loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/dkp_mer_baker21S.webp"
-                            alt="Baker Residence (alternate)" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/dkp_mer_clay08S.webp" alt="Clay Residence"
-                            loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/dkp_Trac_Kingsholme09S.webp"
-                            alt="Kingsholme Residence" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/dkp_Trac_Kingsholme12S.webp"
-                            alt="Kingsholme Residence (alt)" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/DSC_0027.webp" alt="Residential project DSC_0027"
-                            loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/DSC_0525.webp" alt="Residential project DSC_0525"
-                            loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/n4023.webp" alt="Residential n4023" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/n4027.webp" alt="Residential n4027" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/n4064.webp" alt="Residential n4064" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Residential/Trac 016.webp" alt="Residential Trac 016"
-                            loading="lazy" />
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="swiper mySwiper" id="schools" style="display: none;">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Schools/Oxley State School-New Walkways & Ramps/260f2163-8f44-4f05-8474-70d32cdaeffd.webp"
-                            alt="Oxley State School — Walkways" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Schools/Oxley State School-New Walkways & Ramps/ChatGPT Image Feb 8, 2026, 04_39_03 PM.webp"
-                            alt="Oxley State School — Walkways 2" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Schools/Oxley State School-New Walkways & Ramps/ChatGPT Image Feb 8, 2026, 04_54_07 PM.webp"
-                            alt="Oxley State School — Walkways 3" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Schools/Γü¿Seven Hills State SchoolΓü⌐ Γü¿BrisbaneΓü⌐ - New Canopy, Walkways & Alterations to Admin Building/a29aff6f-64c0-4da7-8e5b-06eaa186c85a.webp"
-                            alt="Seven Hills State School — Canopy" loading="lazy" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/optimizovano/Schools/Γü¿Seven Hills State SchoolΓü⌐ Γü¿BrisbaneΓü⌐ - New Canopy, Walkways & Alterations to Admin Building/ChatGPT Image Feb 8, 2026, 04_32_54 PM.webp"
-                            alt="Seven Hills State School — Canopy 2" loading="lazy" />
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
+            <div class="gallery_modal-wrapper" data-scroll-stagger>
+                <a href="#" class="gallery-modal-link" id="gallery_industrial">
+                    <p class="gallery_overlaytext">Industrial & Commercial</p>
+                    <img src="images/optimizovano/Industrial&Commercial/NewAldiSupermarketOrmeau/ind2.webp" alt="StranaHPL Australian Structural Engineering - Industrial & Commercial NewAldi Supermarket Ormeau" />
+                </a>
+                <a href="#" class="gallery-modal-link" id="gallery_residential">
+                    <p class="gallery_overlaytext">Residential</p>
+                    <img src="images/optimizovano/Residential/Trac 016.webp" alt="StranaHPL Australian Structural Engineering - Residential Trac 016">
+                </a>
+                <a href="#" class="gallery-modal-link" id="gallery_schools">
+                    <p class="gallery_overlaytext">Schools and Learning Centres</p>
+                    <img src="images/optimizovano/Schools/Γü¿Seven Hills State SchoolΓü⌐ Γü¿BrisbaneΓü⌐ - New Canopy, Walkways & Alterations to Admin Building/a29aff6f-64c0-4da7-8e5b-06eaa186c85a.webp"
+                        alt="StranaHPL Australian Structural Engineering - Schools and Learning Centres Seven Hills State School Brisbane - New Canopy, Walkways & Alterations to Admin Building">
+                </a>
             </div>
 
         </div>
@@ -301,7 +351,7 @@
         <div class="container">
             <div class="service_wrapper">
                 <div class="service_row" data-scroll-stagger>
-                    <h2 class="text-subheading text-center">Our Services</h2><a href="tel:+61733780281"
+                    <h2 class="text-subheading text-center">Our Services</h2><a href="tel:+61410526094"
                         class="button-cta service_button w-button">Call Us</a>
                 </div>
                 <div class="service" data-scroll-reveal>
@@ -342,37 +392,80 @@
             </div>
         </div>
     </section>
+    <section id="reviews" class="section_testamonials padding-top-125 padding-bottom-125"
+        style="padding-top: 40px; position: relative;"><img src="images/services_blob.webp" loading="lazy" alt=""
+            class="testamonial-blog-bg" />
+        <img src="images/gallery_blob2.webp" loading="lazy" alt="" class="testamonial-blog-bg" style="opacity: 0.3;" />
+        <div class="container">
+            <div class="service_wrapper">
+                <div class="project-section-title" data-scroll-stagger>
+                    <p class="text-desc text-neon text-center">Some of our reviews</p>
+                    <h2 class="text-subheading text-center review-title">Reviews from Our Clients</h2>
+                </div>
+                <div class="review-wrapper" data-scroll-stagger>
+                    <div class="testamonial_card">
+                        <p class="testamonial-name">Billy</p>
+                        <p class="testaomial-subline">from Buderim, QLD</p>
+                        <p class="testaominal-desc2">"A total pleasure to work with. Sailesh is a true gentleman and
+                            very helpful in all the areas in which I needed his assistance. I'd recommend him to anyone.
+                            him to anyone needing engineering services without hesitation. Tnx Sailesh for you diligent
+                            work!"</p>
+                    </div>
+                    <div class="testamonial_card">
+                        <p class="testamonial-name">Tuan N</p>
+                        <p class="testaomial-subline">from Southport, QLD</p>
+                        <p class="testaominal-desc2">"Connected with StranaHPL
+                            Consulting Engineers and would recommend them!"</p>
+                    </div>
+                    <div class="testamonial_card">
+                        <p class="testamonial-name">Tanya</p>
+                        <p class="testaomial-subline">from Buderim, QLD</p>
+
+                        <p class="testaominal-desc2">"Sailesh is Highly professional engineer, pleasure to deal with,
+                            very knowledgeable and polite."</p>
+                    </div>
+                    <div class="testamonial_card">
+                        <p class="testamonial-name">Ben</p>
+                        <p class="testaomial-subline">from Bulimba, QLD</p>
+                        <p class="testaominal-desc2">"Responed quickly, got to site and had a common sense approach.
+                            Really easy to work with."</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
     <section id="contact" class="section_contact-page">
         <div class="container">
             <div class="contact-page-wrapper">
                 <div class="contact-page-title-wrapper" data-scroll-stagger>
                     <h2 class="text-subheading contact-title">Contact</h2><a
-                        href="https://www.facebook.com/p/Strana-HPL-Consulting-Engineers-100070554152383/" target="_blank"
-                        class="link_contact w-inline-block">
+                        href="https://www.facebook.com/p/Strana-HPL-Consulting-Engineers-100070554152383/"
+                        target="_blank" class="link_contact w-inline-block">
                         <div class="contact-page-social">
                             <div class="social-media-circle-modal"><img src="images/iconmonstr-facebook-1-201.svg"
                                     loading="lazy" alt="" class="image-4" /></div>
                             <p class="paragraph-2">StranaHPL</p>
                         </div>
-                    </a><a href="#" class="link_contact w-inline-block">
+                    </a><a href="mailto:info@stranahpl.com.au" class="link_contact w-inline-block">
                         <div class="contact-page-social">
                             <div class="social-media-circle-modal"><img src="images/iconmonstr-email-8-201.svg"
                                     loading="lazy" alt="" class="image-4" /></div>
                             <p class="paragraph-2">info@stranahpl.com.au</p>
                         </div>
-                    </a><a href="#" class="link_contact w-inline-block">
+                    </a><a href="tel:+61410526094" class="link_contact w-inline-block">
                         <div class="contact-page-social">
                             <div class="social-media-circle-modal"><img src="images/phone.svg" loading="lazy"
                                     alt="Call Icon" class="image-4" /></div>
-                            <p class="paragraph-2">+61733780281</p>
+                            <p class="paragraph-2">(61) 0410526094</p>
                         </div>
                     </a>
                 </div>
                 <div class="contact-page-form" data-scroll-reveal>
                     <div class="w-form">
-                        <form id="wf-form-Message" name="wf-form-Message" data-name="Message" method="get"
-                            class="contact-page-form-wrapper" data-wf-page-id="69960453be2e0388c73de1fd"
-                            data-wf-element-id="935a49e4-d75b-6967-0429-4fd88a040b9f"><label for="Name"
+                        <form id="wf-form-Message" name="wf-form-Message" data-name="Message" method="POST"
+                            action="https://formspree.io/f/mwvnlgrk" class="contact-page-form-wrapper"><label for="Name"
                                 class="modal-contact-form-label">Your Name<span
                                     class="text-orange">*</span></label><input class="contact-modal-form-input w-input"
                                 maxlength="256" name="Name" data-name="Name" placeholder="Enter your name" type="text"
@@ -388,15 +481,15 @@
                                 class="contact-modal-form-input w-input" maxlength="256" name="Subject"
                                 data-name="Subject" placeholder="Enter your subject" type="text" id="Subject" /><label
                                 for="File" class="modal-contact-form-label">Attach a file</label><input
-                                class="contact-modal-form-input w-input" maxlength="256" name="File" data-name="File"
-                                placeholder="Click to browse a file (No filles attached)" type="text" id="File" /><label
+                                class="contact-modal-form-input w-input" name="File" data-name="File"
+                                placeholder="Click to browse a file (No files attached)" type="file" id="File" /><label
                                 for="Message-2" class="modal-contact-form-label">Your Message<span
                                     class="text-orange">*</span></label><textarea
                                 placeholder="Type your message here..." maxlength="5000" id="Message-2" name="Message-2"
                                 data-name="Message 2"
                                 class="contact-modal-form-input message-input contact-page-message w-input"></textarea>
                             <div class="modal-contact-buttons"><input type="submit" data-wait="Please wait..."
-                                    class="button-cta-orange w-button" value="Send Message" /></div>
+                                    class="button-cta w-button" value="Send Message" /></div>
                         </form>
                         <div class="w-form-done">
                             <div>Thank you! Your submission has been received!</div>
@@ -412,27 +505,37 @@
     <section class="section_footer">
         <div class="container-large">
             <div class="footer-wrapper">
-                <div class="footer-top-wrapper">
-                    <div class="footer-col1"><a href="#" class="w-nav-brand"><img src="images/logo_new1.webp"
-                                loading="lazy" width="181" sizes="181px"
-                                alt="HPL Engineering Consulting - Professional Engineering Services in Australia"
-                                srcset="images/logo_new1-p-500.webp 500w, images/logo_new1-p-800.webp 800w, images/logo_new1-p-1080.webp 1080w, images/logo_new1-p-1600.webp 1600w, images/logo_new1.webp 1788w" /></a>
-                    </div>
-                    <div class="footer-col2"><a href="#home" class="footer_link">Home</a><a href="#projects"
-                            class="footer_link">Gallery</a><a href="#testamonials" class="footer_link">Services</a><a
-                            href="#contact" class="footer_link">Contact</a></div>
-                </div>
                 <div class="footer-bottom">
-                    <p class="text-desc text-center workflow-desc">© 2026 stranahpl.com.au</p>
-                    <p class="text-desc text-center workflow-desc">Developed by todoroviczoran.com</p>
+                    <div>
+                        <p class="footer-text">© 2026 stranahpl.com.au</p>
+                        <a href="https://todoroviczoran.com" target="_blank" style="text-decoration: none;"
+                            class="footer-text">developed by todoroviczoran.com</a>
+                    </div>
+
+                    <p class="footer-text footer-strana">StranaHPL Consulting Engineers A Division of Strana Holdings
+                        Pty Ltd ABN 88
+                        100 623 550</p>
                 </div>
+
             </div>
         </div>
     </section>
+    <!-- Modal gallery markup -->
+    <div id="modalGallery" class="modal-gallery" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close">×</button>
+            <button class="modal-prev" aria-label="Previous">‹</button>
+            <img src="" alt="" id="modalGalleryImage" class="modal-main-img" />
+            <button class="modal-next" aria-label="Next">›</button>
+            <div class="modal-caption" id="modalGalleryCaption"></div>
+            <div class="modal-previews" id="modalPreviews" aria-hidden="false"></div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>
+    <script src="js/lenis.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="js/lenis.js" type="text/javascript"></script>
     <script src="js/smooth-navigation.js" type="text/javascript"></script>
     <script src="js/jquery.js?site=69960453be2e0388c73de201" type="text/javascript"></script>
     <script src="js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script>
@@ -530,6 +633,20 @@
                 // set initial title based on the active link
                 const titleEl = document.getElementById('currentTitle');
                 if (titleEl) titleEl.textContent = active.textContent.trim();
+            }
+        });
+
+        // Handle file input display
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('File');
+            if (fileInput) {
+                fileInput.addEventListener('change', function () {
+                    if (this.files && this.files.length > 0) {
+                        this.placeholder = this.files[0].name;
+                    } else {
+                        this.placeholder = 'Click to browse a file (No files attached)';
+                    }
+                });
             }
         });
     </script>
