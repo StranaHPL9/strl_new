@@ -2647,6 +2647,11 @@ a {
   font-weight: 400;
 }
 
+.about-subline{
+  color: var(--gray);
+  font-size: 28px;
+}
+
 .button-link.modal-contact-close-btn {
   text-align: center;
   transition: all .1s;
@@ -3058,7 +3063,7 @@ a {
   object-fit: cover;
   border-radius: 16px;
   width: 300px;
-  height: 260px;
+  height: 300px;
 }
 
 .workflow-section-blob-bg {
@@ -3825,6 +3830,10 @@ a {
     flex: 0 0 100%;
     width: 100%;
   }
+  .about-subline{
+    font-size: 22px;
+  }
+
 }
 
 /* Strong overrides to ensure slides align side-by-side on desktop */
@@ -4397,6 +4406,11 @@ a {
 
   .review-title{
     text-align: center !important;
+  }
+  .about-subline{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 5px;
   }
   .body {
     overflow-x: hidden;
