@@ -27,6 +27,7 @@
   font-size: 18px;
   line-height: 1.5;
   text-align: center;
+  text-wrap: balance; /* even line lengths; avoids splitting "Sailesh / Pandit" */
 }
 .sx-hero-buttons {
   flex-wrap: wrap;
